@@ -21,6 +21,15 @@ function setup() {
 */
 function draw() {
     // Update
+    // check for a winner
+    let result = checkWin();
+    if (result == VALUEO) {
+        // O has won
+    } else if (result == VALUEX) {
+        // X has won
+    } else {
+        // on going game... do nothing
+    }
     // Render
     drawBoard();
 }
@@ -117,4 +126,37 @@ function placeSymbolPosition(column, row, symbol) {
     } else {
         row3[column] = symbol;
     }
+}
+
+
+function checkWin() {
+    // check horizontal
+    if (row1[0] == row1[1] && row1[0] == row1[2] && row1[0] != VALUEOPEN) {
+        return row1[0];
+    }
+    if (row2[0] == row2[1] && row2[0] == row2[2] && row2[0] != VALUEOPEN) {
+        return row2[0];
+    }
+    if (row3[0] == row3[1] && row3[0] == row3[2] && row3[0] != VALUEOPEN) {
+        return row3[0];
+    }
+    // check verticle
+    if (row1[0] == row2[0] && row1[0] == row3[0] && row1[0] != VALUEOPEN) {
+        return row1[0];
+    }
+    if (row1[1] == row2[1] && row1[1] == row3[1] && row1[1] != VALUEOPEN) {
+        return row1[1];
+    }
+    if (row1[2] == row2[2] && row1[2] == row3[2] && row1[2] != VALUEOPEN) {
+        return row1[2];
+    }
+    // check diagonals
+    if (row1[0] == row2[1] && row1[0] == row3[2] && row1[0] != VALUEOPEN) {
+        return row1[0];
+    }
+    if (row1[2] == row2[1] && row1[2] == row3[0] && row1[2] != VALUEOPEN) {
+        return row1[2];
+    }
+    // no winner
+    return false;
 }
